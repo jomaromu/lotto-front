@@ -1,0 +1,14 @@
+.organizar-switches {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 40px;
+    border: 1px solid rgb(223, 223, 223);
+    border-radius: 4px;
+    align-items: center;
+    padding: 5px;
+  }
+  
+  .border-rojo {
+    border: 1px solid #fe6a49 !important;
+  }
+  

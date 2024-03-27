@@ -1,0 +1,305 @@
+<!-- <a class="btn btn-primary" (click)="CenteredModal(CenteredContent)">
+  <i class="fa fa-plus"></i> Nuevo role
+</a> -->
+<a (click)="CenteredModal(CenteredContent)">
+  <svg>
+    <use href="assets/svg/icon-sprite.svg#edit-content"></use>
+  </svg>
+</a>
+<ng-template #CenteredContent let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Editar/Ver role</h5>
+      <button
+        class="btn-close py-0"
+        type="button"
+        (click)="modal.dismiss('Cross click')"
+      ></button>
+    </div>
+
+    <div class="modal-body">
+      <div class="modal-toggle-wrapper">
+        <!-- // formulario -->
+        <form class="row g-3" [formGroup]="forma">
+          <!-- // nombre -->
+          <div class="col-md-12">
+            <label class="form-label" for="nombre">Role</label>
+            <input
+              class="form-control"
+              id="nombre"
+              type="text"
+              placeholder="Nombre del role"
+              formControlName="nombre"
+              [ngClass]="{
+                'border-rojo':
+                  forma.controls.nombre.invalid && forma.controls.nombre.touched
+              }"
+            />
+          </div>
+
+          <!-- // restricciones -->
+          <div class="col-md-12">
+            <label class="form-label" for="nombre">Restricciones</label>
+            <div class="card-body">
+              <div
+                class="accordion dark-accordion"
+                id="simpleaccordion"
+                ngbAccordion
+                [closeOthers]="true"
+              >
+                <!-- sidebar -->
+                <div class="accordion-item" ngbAccordionItem>
+                  <h2
+                    ngbAccordionHeader
+                    class="accordion-header"
+                    id="headingOne"
+                  >
+                    <button
+                      class="accordion-button collapsed accordion-light-primary txt-primary active"
+                      type="button"
+                      ngbAccordionButton
+                    >
+                      Sidebar
+                      <!-- <app-feathericon
+                          [icon]="'chevron-down'"
+                          class="svg-color"
+                        ></app-feathericon> -->
+                    </button>
+                  </h2>
+                  <div
+                    class="accordion-collapse"
+                    id="collapseOne"
+                    ngbAccordionCollapse
+                  >
+                    <div class="accordion-body" ngbAccordionBody>
+                      <ng-template>
+                        <!-- // switches -->
+                        <div class="organizar-switches">
+                          <div class="form-check form-switch">
+                            <input
+                              class="form-check-input"
+                              id="ver-dashboard"
+                              type="checkbox"
+                              role="switch"
+                              formControlName="verDashboard"
+                            />
+                            <label class="form-check-label" for="ver-dashboard"
+                              >Ver dashboard</label
+                            >
+                          </div>
+                          <div class="form-check form-switch">
+                            <input
+                              class="form-check-input"
+                              id="ver-listas"
+                              type="checkbox"
+                              role="switch"
+                              formControlName="verListas"
+                            />
+                            <label class="form-check-label" for="ver-listas"
+                              >Ver listas</label
+                            >
+                          </div>
+                          <div class="form-check form-switch">
+                            <input
+                              class="form-check-input"
+                              id="ver-matrices"
+                              type="checkbox"
+                              role="switch"
+                              formControlName="verMatrices"
+                            />
+                            <label class="form-check-label" for="ver-matrices"
+                              >Ver matrices</label
+                            >
+                          </div>
+                          <div class="form-check form-switch">
+                            <input
+                              class="form-check-input"
+                              id="ver-usuarios"
+                              type="checkbox"
+                              role="switch"
+                              formControlName="verUsuarios"
+                            />
+                            <label class="form-check-label" for="ver-usuarios"
+                              >Ver usuarios</label
+                            >
+                          </div>
+                          <div class="form-check form-switch">
+                            <input
+                              class="form-check-input"
+                              id="ver-roles"
+                              type="checkbox"
+                              role="switch"
+                              formControlName="verRoles"
+                            />
+                            <label class="form-check-label" for="ver-roles"
+                              >Ver roles</label
+                            >
+                          </div>
+                          <div class="form-check form-switch">
+                            <input
+                              class="form-check-input"
+                              id="ver-productos"
+                              type="checkbox"
+                              role="switch"
+                              formControlName="verProductos"
+                            />
+                            <label class="form-check-label" for="ver-productos"
+                              >Ver productos</label
+                            >
+                          </div>
+                        </div>
+                      </ng-template>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- listas -->
+                <div class="accordion-item" ngbAccordionItem>
+                  <h2
+                    ngbAccordionHeader
+                    class="accordion-header"
+                    id="headingOne"
+                  >
+                    <button
+                      class="accordion-button collapsed accordion-light-primary txt-primary active"
+                      type="button"
+                      ngbAccordionButton
+                    >
+                      Listas
+                      <!-- <app-feathericon
+                          [icon]="'chevron-down'"
+                          class="svg-color"
+                        ></app-feathericon> -->
+                    </button>
+                  </h2>
+                  <div
+                    class="accordion-collapse"
+                    id="collapseOne"
+                    ngbAccordionCollapse
+                  >
+                    <div class="accordion-body" ngbAccordionBody>
+                      <!-- switches -->
+                      <ng-template>
+                        <div class="organizar-switches">
+                          <div class="form-check form-switch">
+                            <input
+                              class="form-check-input"
+                              id="ver-propias"
+                              type="checkbox"
+                              role="switch"
+                              formControlName="verPropias"
+                            />
+                            <label class="form-check-label" for="ver-propias"
+                              >Ver propias</label
+                            >
+                          </div>
+                          <div class="form-check form-switch">
+                            <input
+                              class="form-check-input"
+                              id="ver-filtros"
+                              type="checkbox"
+                              role="switch"
+                              formControlName="verFiltros"
+                            />
+                            <label class="form-check-label" for="ver-filtros"
+                              >Ver filtros</label
+                            >
+                          </div>
+                          <div class="form-check form-switch">
+                            <input
+                              class="form-check-input"
+                              id="crear-listas"
+                              type="checkbox"
+                              role="switch"
+                              formControlName="crearListas"
+                            />
+                            <label class="form-check-label" for="crear-listas"
+                              >Crear listas</label
+                            >
+                          </div>
+                          <div class="form-check form-switch">
+                            <input
+                              class="form-check-input"
+                              id="ver-listas"
+                              type="checkbox"
+                              role="switch"
+                              formControlName="verListasPanel"
+                            />
+                            <label class="form-check-label" for="ver-listas"
+                              >Ver listas</label
+                            >
+                          </div>
+                          <div class="form-check form-switch">
+                            <input
+                              class="form-check-input"
+                              id="eliminar-listas"
+                              type="checkbox"
+                              role="switch"
+                              formControlName="eliminarListas"
+                            />
+                            <label
+                              class="form-check-label"
+                              for="eliminar-listas"
+                              >Eliminar listas</label
+                            >
+                          </div>
+                        </div>
+                      </ng-template>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- status - vendedor -->
+          <div class="organizar-switches">
+            <!-- status -->
+            <div class="form-check form-switch">
+              <input
+                class="form-check-input"
+                id="flexSwitchCheckDefault"
+                type="checkbox"
+                role="switch"
+                formControlName="estado"
+              />
+              <label class="form-check-label" for="flexSwitchCheckDefault"
+                >Estado</label
+              >
+            </div>
+
+            <!-- vendedor -->
+            <div class="form-check form-switch">
+              <input
+                class="form-check-input"
+                id="flexSwitchCheckDefault"
+                type="checkbox"
+                role="switch"
+                formControlName="vendedor"
+              />
+              <label class="form-check-label" for="flexSwitchCheckDefault"
+                >Vendedor</label
+              >
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              class="btn btn-secondary"
+              type="button"
+              (click)="modal.dismiss('Cross click')"
+            >
+              Cerrar
+            </button>
+            <button
+              class="btn btn-primary"
+              type="submit"
+              (click)="editarRole()"
+            >
+              Editar role
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-template>

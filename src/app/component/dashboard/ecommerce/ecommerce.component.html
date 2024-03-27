@@ -1,0 +1,42 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-6 box-col-7">
+            <app-sales-chart></app-sales-chart>
+        </div>
+        <div class="col-xl-3 col-md-6 box-col-5 total-revenue-total-order">
+            <div class="row">
+                <div class="col-xl-12">
+                    <app-common-ecommerce-chart [data]="totalrevenuchart"></app-common-ecommerce-chart>
+                </div>
+                <div class="col-xl-12">
+                    <app-common-ecommerce-chart [data]="totalorderchart"></app-common-ecommerce-chart>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 special-Offer-banner box-col-none">
+            <app-special-offer></app-special-offer>
+        </div>
+        <div class="col-xxl-6 box-col-12">
+            <div class="row">
+                <div class="col-xl-5 col-sm-6">
+                    <app-common-product-costing></app-common-product-costing>
+                </div>
+                <div class="col-xl-7 col-sm-6">
+                    <app-sale-history></app-sale-history>
+                </div>
+            </div>
+        </div>
+        <div class="col-xxl-6 col-md-12 box-col-12">
+            <app-latest-orders></app-latest-orders>
+        </div>
+        <div class="col-xxl-6 box-col-12">
+            <app-live-product></app-live-product>
+        </div>
+        <div class="col-xxl-3 col-md-6 box-col-6">
+            <app-top-revenue-product></app-top-revenue-product>
+        </div>
+        <div class="col-xxl-3 col-md-6 box-col-6">
+            <app-ecommerce-details [banner]="true"></app-ecommerce-details>
+        </div>
+    </div>
+</div>

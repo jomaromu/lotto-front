@@ -1,0 +1,130 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="list-product-header">
+            <div>
+              <app-modal-nuevo-role
+                (emitGetRols)="modalUpdateRols($event)"
+              ></app-modal-nuevo-role>
+            </div>
+          </div>
+        </div>
+
+        <!-- termina top -->
+
+        <!-- empieza tabla -->
+
+        <div class="card-body">
+          <div class="list-product table-responsive custom-scrollbar">
+            <div class="d-flex justify-content-between mt-2">
+              <select
+                class="form-select"
+                style="width: auto"
+                name="pageSize"
+              ></select>
+              <div class="mb-3 row">
+                <label
+                  for="table-complete-search"
+                  class="col-xs-3 col-sm-auto col-form-label"
+                  >Búscar:</label
+                >
+                <div class="col-xs-3 col-sm-auto">
+                  <input
+                    id="table-complete-search"
+                    type="text"
+                    class="form-control"
+                    name="searchTerm"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+            </div>
+            <table class="table" id="project-status">
+              <thead>
+                <tr>
+                  <th>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input checkbox-primary"
+                        type="checkbox"
+                      />
+                    </div>
+                  </th>
+                  <th sortable="name">
+                    <span class="f-light f-w-600">Nombre</span>
+                  </th>
+                  <th sortable="sku">
+                    <span class="f-light f-w-600">Estado</span>
+                  </th>
+
+                  <th><span class="f-light f-w-600">Acciones</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (rol of rols; track rol) {
+
+                <tr class="product-removes">
+                  <td>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input checkbox-primary"
+                        type="checkbox"
+                      />
+                    </div>
+                  </td>
+                  <td>
+                    <div class="product-names">
+                      <p>{{ rol?.nombre }}</p>
+                    </div>
+                  </td>
+
+                  <td>
+                    @if(!rol.estado) {
+                    <span class="badge badge-light-secondary">Inactivo</span>
+                    } @else {
+                    <span class="badge badge-light-primary">Activo</span>
+                    }
+                  </td>
+
+                  <td>
+                    <div class="product-action">
+                      <!-- <a>
+                        <svg>
+                          <use
+                            href="assets/svg/icon-sprite.svg#edit-content"
+                          ></use>
+                        </svg>
+                      </a> -->
+                      <app-modal-editar-role
+                        [_id]="rol?._id"
+                        (emitGetRols)="modalUpdateRols($event)"
+                      ></app-modal-editar-role>
+                      <a (click)="eliminarRole(rol?._id)">
+                        <svg>
+                          <use href="assets/svg/icon-sprite.svg#trash1"></use>
+                        </svg>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+                } @if($any(!rols).length){
+                <tr class="odd">
+                  <td
+                    colspan="8"
+                    class="dataTables_empty"
+                    style="text-align: center"
+                  >
+                    Opps! No hay nada que mostrar.
+                  </td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
