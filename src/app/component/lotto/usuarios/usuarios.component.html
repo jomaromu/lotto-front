@@ -1,13 +1,145 @@
 <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="card">
-          <div class="card-body">
-            <app-top-section></app-top-section>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="list-product-header">
+            <div>
+              <app-modal-nuevo-user
+                (emitGetRols)="modalUpdateUsers($event)"
+              ></app-modal-nuevo-user>
+            </div>
           </div>
-          <app-product-data-table></app-product-data-table>
+        </div>
+
+        <!-- termina top -->
+
+        <!-- empieza tabla -->
+
+        <div class="card-body">
+          <div class="list-product table-responsive custom-scrollbar">
+            <div class="d-flex justify-content-between mt-2">
+              <select
+                class="form-select"
+                style="width: auto"
+                name="pageSize"
+              ></select>
+              <div class="mb-3 row">
+                <label
+                  for="table-complete-search"
+                  class="col-xs-3 col-sm-auto col-form-label"
+                  >Búscar:</label
+                >
+                <div class="col-xs-3 col-sm-auto">
+                  <input
+                    id="table-complete-search"
+                    type="text"
+                    class="form-control"
+                    name="searchTerm"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+            </div>
+            <table class="table" id="project-status">
+              <thead>
+                <tr>
+                  <th>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input checkbox-primary"
+                        type="checkbox"
+                      />
+                    </div>
+                  </th>
+                  <th sortable="name">
+                    <span class="f-light f-w-600">Nombre</span>
+                  </th>
+                  <th sortable="name">
+                    <span class="f-light f-w-600">Teléfono</span>
+                  </th>
+                  <th sortable="name">
+                    <span class="f-light f-w-600">Correo</span>
+                  </th>
+                  <th sortable="name">
+                    <span class="f-light f-w-600">Role</span>
+                  </th>
+                  <th sortable="sku">
+                    <span class="f-light f-w-600">Estado</span>
+                  </th>
+                  <th><span class="f-light f-w-600">Acciones</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (user of users; track user) {
+
+                <tr class="product-removes">
+                  <td>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input checkbox-primary"
+                        type="checkbox"
+                      />
+                    </div>
+                  </td>
+                  <td>
+                    <div class="product-names">
+                      <p>{{ user?.nombre }} {{ user?.apellido }}</p>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="product-names">
+                      <p>{{ user?.telefono }}</p>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="product-names">
+                      <p>{{ user?.correo }}</p>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="product-names">
+                      <p>{{ user?.role?.nombre }}</p>
+                    </div>
+                  </td>
+                  <td>
+                    @if(!user.estado) {
+                    <span class="badge badge-light-secondary">Inactivo</span>
+                    } @else {
+                    <span class="badge badge-light-primary">Activo</span>
+                    }
+                  </td>
+
+                  <td>
+                    <div class="product-action">
+                      <app-modal-editar-user
+                        [_id]="user?._id"
+                        (emitGetUsers)="modalUpdateUsers($event)"
+                      ></app-modal-editar-user>
+                      <a (click)="eliminarUser(user?._id)">
+                        <svg>
+                          <use href="assets/svg/icon-sprite.svg#trash1"></use>
+                        </svg>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+                } @if($any(!users).length){
+                <tr class="odd">
+                  <td
+                    colspan="8"
+                    class="dataTables_empty"
+                    style="text-align: center"
+                  >
+                    Opps! No hay nada que mostrar.
+                  </td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  
+</div>

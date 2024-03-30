@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
   styleUrl: "./roles.component.scss",
 })
 export class RolesComponent implements OnInit, OnDestroy {
-  rols: Array<RoleDB>;
+  rols: Array<RoleDB> = [];
   obsEliminar: Subscription;
   obsGet: Subscription;
 
@@ -20,7 +20,7 @@ export class RolesComponent implements OnInit, OnDestroy {
     this.getRols();
   }
 
-  // viene del emit del modal-nuevo-role
+  // viene del emit de los modals
   modalUpdateRols(e: boolean): void {
     if (e) {
       this.getRols();

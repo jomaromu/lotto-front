@@ -1,13 +1,130 @@
 <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="card">
-          <div class="card-body">
-            <app-top-section></app-top-section>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="list-product-header">
+            <div>
+              <app-modal-nuevo-producto
+                (emitGetProducts)="modalUpdateProducts($event)"
+              ></app-modal-nuevo-producto>
+            </div>
           </div>
-          <app-product-data-table></app-product-data-table>
+        </div>
+
+        <!-- termina top -->
+
+        <!-- empieza tabla -->
+        <div class="card-body">
+          <div class="list-product table-responsive custom-scrollbar">
+            <div class="d-flex justify-content-between mt-2">
+              <select
+                class="form-select"
+                style="width: auto"
+                name="pageSize"
+              ></select>
+              <div class="mb-3 row">
+                <label
+                  for="table-complete-search"
+                  class="col-xs-3 col-sm-auto col-form-label"
+                  >Búscar:</label
+                >
+                <div class="col-xs-3 col-sm-auto">
+                  <input
+                    id="table-complete-search"
+                    type="text"
+                    class="form-control"
+                    name="searchTerm"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+            </div>
+            <table class="table" id="project-status">
+              <thead>
+                <tr>
+                  <th>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input checkbox-primary"
+                        type="checkbox"
+                      />
+                    </div>
+                  </th>
+                  <th sortable="name">
+                    <span class="f-light f-w-600">Nombre</span>
+                  </th>
+                  <th sortable="name">
+                    <span class="f-light f-w-600">Precio</span>
+                  </th>
+                  <th sortable="sku">
+                    <span class="f-light f-w-600">Estado</span>
+                  </th>
+
+                  <th><span class="f-light f-w-600">Acciones</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (product of products; track product) {
+
+                <tr class="product-removes">
+                  <td>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input checkbox-primary"
+                        type="checkbox"
+                      />
+                    </div>
+                  </td>
+                  <td>
+                    <div class="product-names">
+                      <p>{{ product?.nombre }}</p>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="product-names">
+                      <p>{{ product.precio | currency }}</p>
+                    </div>
+                  </td>
+
+                  <td>
+                    @if(!product?.estado) {
+                    <span class="badge badge-light-secondary">Inactivo</span>
+                    } @else {
+                    <span class="badge badge-light-primary">Activo</span>
+                    }
+                  </td>
+
+                  <td>
+                    <div class="product-action">
+                      <app-modal-editar-producto
+                        [_id]="product?._id"
+                        (emitGetProducts)="modalUpdateProducts($event)"
+                      ></app-modal-editar-producto>
+                      <a (click)="eliminarProducto(product?._id)">
+                        <svg>
+                          <use href="assets/svg/icon-sprite.svg#trash1"></use>
+                        </svg>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+                } @if($any(!products).length){
+                <tr class="odd">
+                  <td
+                    colspan="8"
+                    class="dataTables_empty"
+                    style="text-align: center"
+                  >
+                    Opps! No hay nada que mostrar.
+                  </td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  
+</div>

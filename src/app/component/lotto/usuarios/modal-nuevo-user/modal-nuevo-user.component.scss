@@ -1,0 +1,10 @@
+.border-rojo {
+  border: 1px solid #fe6a49 !important;
+}
+
+.wrap-controls {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 15px;
+  row-gap: 25px;
+}
